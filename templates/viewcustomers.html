@@ -1,0 +1,56 @@
+<html>
+<head>
+</head>
+<body>
+<form action="/viewcustomers"></form>
+<h1>Flight {{flight_num}} Passengers</h1>
+<style>
+	table {
+	  font-size: small;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+
+	tr:nth-child(even) {
+	  background-color: #dddddd;
+	}
+</style>
+
+
+
+<table>
+<th>Email</th>
+<th>Name</th>
+<th>Password</th>
+<th>Address</th>
+<th>Phone Number</th>
+<th>Passport Number</th>
+<th>Passport Expiration</th>
+<th>Passport Country</th>
+<th>Date of Birth</th>
+
+
+{% for line in customers %}
+<tr>
+  <td>{{line['email']}}</td>
+  <td>{{line['first_name']}} {{line['last_name']}}</td>
+  <td>{{line['password']}}</td>
+  <td>{{line['building_number']}} {{line['street']}} {{line['city']}}, {{line['state']}}</td>
+  <td>{{line['phone_number']}}</td>
+  <td>{{line['passport_number']}}</td>
+  <td>{{line['passport_expiration']}}</td>
+  <td>{{line['passport_country']}}</td>
+  <td>{{line['date_of_birth']}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<a href="/viewflights">Go Back</a>
+
+</body>

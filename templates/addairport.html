@@ -1,0 +1,64 @@
+<html>
+<head>
+</head>
+<body>
+<form action="/addairport" method="POST" >
+    <h1>Add Airports</h1>
+    <table>
+        <tr>
+            <td  alignright, class="input">Airport Code</td>
+            <td class="input"><input type="text" name="code" placeholder="e.g. JFK" required/></td>
+        </tr>
+        <tr>
+            <td  alignright, class="input">Airport Name</td>
+            <td class="input"><input type="text" name="airport_name" placeholder="e.g. JFK Airport" required/></td>
+        </tr>
+        <tr>
+            <td  alignright, class="input">City</td>
+            <td class="input"><input type="text" name="city" placeholder="e.g. NYC" required/></td>
+        </tr>
+    </table>
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+
+<style>
+	table {
+	  font-size: small;;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+
+	tr:nth-child(even) {
+	  background-color: #dddddd;
+	}
+</style>
+
+<h3>Current Airports</h3>
+<table>
+    <th>Code</th>
+    <th>Airport Name</th>
+    <th>City</th>
+
+    {% for line in airports %}
+    <tr>
+      <td>{{line['code']}}</td>
+      <td>{{line['airport_name']}}</td>
+      <td>{{line['city']}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+
+</br>
+
+<a href="/staffhome">Go Back</a>
+
+</html>

@@ -1,0 +1,93 @@
+<html>
+<head>
+</head>
+
+<body>
+
+    <style>
+        table {
+          font-size: small;;
+          border-collapse: collapse;
+          width: 100%;
+        }
+    
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+    
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
+    
+    <table>
+    <th>flight_num</th>
+    <th>departure_date</th>
+    <th>departure_time</th>
+    <th>departure_airport</th>
+    <th>arrival_date</th>
+    <th>arrival_time</th>
+    <th>arrival_airport</th>
+    <th>status</th>
+    <th>airline_name</th>
+    <th>airline_id</th>
+    <th>Edit</th>
+    
+    
+    {% for line in flights %}
+    <form action="/changestatus" method="POST">
+    <tr>
+      <td>{{line['flight_num']}}</td>
+      <td>{{line['departure_date']}}</td>
+      <td>{{line['departure_time']}}</td>
+      <td>{{line['departure_airport']}}</td>
+      <td>{{line['arrival_date']}}</td>
+      <td>{{line['arrival_time']}}</td>
+      <td>{{line['arrival_airport']}}</td>
+      <td>{{line['status']}}</td>
+      <td>{{line['airline_name']}}</td>
+      <td>{{line['id_num']}}</td>
+      <td>{{line['Edit']}}
+        
+            <input type="checkbox" name="mycheckbox" value="{{line['flight_num']}}" >
+            
+    
+      </td>  
+      
+    </tr>
+    
+    {% endfor %}
+  </table>
+    <label for="stat">Change the status of select flight to:</label>
+    <select name="status" id="status" required>
+      <option value="on-time">on-time</option>
+      <option value="delayed">delayed</option>
+    </select>
+    <br></br>
+  
+    <input type="submit" value="Confirm">
+  
+    <p></p>
+    
+    
+<a href="/staffhome">Go Back</a>
+
+<form action="/changestatus" method="POST" id="demo" value=x></form>
+
+<script>
+  $("button").click(function(){
+      var value=$(this).attr("value");
+      alert($(this).attr('value'))
+      });
+
+  function myFunction() {
+  var x = document.getElementById("status").value;
+  document.getElementById("demo").innerHTML = x;
+}
+</script>
+</body>
+
+
+</html>

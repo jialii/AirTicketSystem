@@ -1,0 +1,49 @@
+<html>
+<head>
+</head>
+<body>
+<form action="/viewratings"></form>
+<h1>View Ratings</h1>
+<h3>Average Ratings</h3>
+{% for key in averages %}
+	<h5>Flight {{key}} average rating: {{averages[key]}}</h3>
+{% endfor %}
+
+<style>
+	table {
+	  font-size: small;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+
+	tr:nth-child(even) {
+	  background-color: #dddddd;
+	}
+</style>
+
+<table>
+<th>Flight Number</th>
+<th>Email</th>
+<th>Ratings</th>
+<th>Comments</th>
+
+<h3>Flight Ratings</h3>
+{% for line in ratings %}
+	<tr>
+		<td>{{line['flight_num']}}</td>
+		<td>{{line['email']}}</td>
+		<td>{{line['ratings']}}</td>
+	  <td>{{line['comments']}}</td>
+	</tr>
+{% endfor %}
+</table>
+
+<a href="/staffhome">Go Back</a>
+
+</body>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+    {% if username %} 
+		<h1>Welcome back, {{username}}</h1>
+	{% endif %}
+    
+    {% if year_total %}
+        <p>Your total revenue from ticket sales in the past 365 days was USD {{year_total}}. </p>
+    {% else %}
+        <p>Your total revenue from ticket sales in the past 365 days was USD 0. </p>
+    {% endif %}
+
+    {% if month_total %}
+        <p>Your total revenue from ticket sales in the past 30 days was USD {{month_total}}. </p>
+    {% else %}
+        <p>Your total revenue from ticket sales in the past 30 days was USD 0. </p>
+    {% endif %}
+
+    <a href="/staffhome">Go Back</a>
+
+</body>

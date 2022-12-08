@@ -1,0 +1,23 @@
+<html>
+<head>
+</head>
+<body>
+<form action="/registerAuth" method="POST" >
+	
+	<h1>What type of account are you registering?</h1>
+	<input type="radio" id="id1" name="identity" value="staff"required>
+  	<label for="id1">Staff</label><br>
+  	<input type="radio" id="id2" name="identity" value="customer">
+  	<label for="id2">Customer</label><br>  
+	<input type="submit" value = 'Start Registration' />
+	{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+	{% endif %}
+</form>
+<a href="/">Go back</a>
+
+
+</body>
+
+
+</html>

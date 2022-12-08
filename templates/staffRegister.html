@@ -1,0 +1,144 @@
+<html>
+<head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+
+</head>
+<body>
+    
+        <form action="/staffRegister" method="POST">
+            <table>
+            <h1>Please enter your information </h1>
+            <h3>Name:</h3>
+                <tr>
+                    <p>First name:
+                    <input type="text" name = "first_name" placeholder="First Name" required/>
+                    <p>Last name:
+                    <input type="text" name = "last_name" placeholder="Last Name" required/><br>
+                </tr>
+            
+
+            <h3>Username and Password:</h3>
+                <p>Username:
+                <input type="text" name = "username" placeholder="username" required/> </br>
+
+                <tr>
+                    <p>Password:
+                    <input type="password" name = "password" placeholder="password" required/>
+                    <p>Please re-enter your password:
+                    <input type="password" name = "passwordtwo" placeholder="password" required/></br>
+                </tr>
+            <h3>Contact Information</h3>
+                <div id="InputsWrapper">
+                    <div class="row",id="add_nums" myValue="numbers">
+                        <input type="text" name="phone_number[]" placeholder="Phone Number" class="form-control num_list" required/>
+                        <class="col-xs-6"><button type="button" name="add" id="AddMoreFileBox" class="btn btn-success">Add More</button></div>
+                        </div>
+                 
+            <h3>Date Of Birth:</h3>
+            <input type="date" name = "dob" placeholder="YYYY/MM/DD" required/> </br>
+           
+            <h3>Airline Name:</h3>
+            <input type="text" name = "airline_name" placeholder="Airline Name" required/> </br>
+            <p></p>
+            <input type="submit" value = 'Register' />
+        {% if error %}
+            <p class="error"><strong>Error:</strong> {{error}}</p>
+        {% endif %}
+        </table>
+        </form>
+    
+    
+
+    <a href="/">Go back</a>
+  
+    
+    <script>
+        $(document).ready(function() {
+          
+        var MaxInputs       = 8; //maximum input boxes allowed
+        var InputsWrapper   = $("#InputsWrapper"); //Input boxes wrapper ID
+        var AddButton       = $("#AddMoreFileBox"); //Add button ID
+          
+        var x = InputsWrapper.length; //initlal text box count
+        var FieldCount=1; //to keep track of text box added
+          
+        $(AddButton).click(function (e)  //on add input button click
+        {
+                if(x <= MaxInputs) //max input box allowed
+                {
+                    FieldCount++; //text box added increment
+                    //add input box
+                    $(InputsWrapper).append('<div class="row"><input type="text" placeholder="Optional Phone Number" class="form-control num_list" name="phone_number[]" id="field_'+ FieldCount +'" placeholder="Phone Number '+ FieldCount +'"/><a href="#" class="btn btn-danger removeclass">REMOVE</a></div>');
+                    x++; //text box increment
+                }
+        return false;
+        });
+          
+        $("body").on("click",".removeclass", function(e){ //user click on remove text
+                if( x > 1 ) {
+                        $(this).parent('div').remove(); //remove text box
+                        x--; //decrement textbox
+                }
+        return false;
+        })
+         $('#submit').click(function(){            
+                   $.ajax({  
+                        url:"/customerRegister",  
+                        method:"POST",  
+                        data:$('#add_num').serialize(),  
+                        success:function(data)  
+                        {  alert(data)
+                             $('#resultbox').html(data);  
+                             $('#add_num')[0].reset();  
+                        }  
+                   });  
+              }); 
+        });
+        
+        </script>
+        
+        
+</body>
+
+<style>
+    table {
+      font-size: small;;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+
+    .input-wrapper div{
+        margin-bottom: 10px;
+    }
+
+    .remove-input{
+        margin-top:10px;
+        margin-left:15px;
+        vertical-align:tect-bottom;
+    }
+
+    .add-input{
+        margin-top:10px;
+        margin-left:10px;
+        vertical-align:text-bottom;
+    }
+
+</style>
+
+
+
+</html>

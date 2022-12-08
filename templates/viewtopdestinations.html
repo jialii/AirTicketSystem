@@ -1,0 +1,66 @@
+
+  <html>
+  <head>
+  </head>
+  <body>
+    <h3>View Top Destinations</h3>
+      <form action="/viewtopdestinations" method="POST">   
+         
+        <input type="submit" value="Find Top Destinations" style="float: right;">
+        <select name="timerange" required>    
+          <option value="month" selected>Last 3 Months</option>
+          <option value="year" >Last Year</option>        
+      </select> 
+      </form> 
+     
+      <table>
+          <th>Rank</th>
+          <th>Destination</th>
+          <th>Number of Tickets Sold</th>
+          
+          {% for line in info %}
+          <tr> 
+            <TD></TD>
+            <td>{{line['arrival_airport']}}</td>
+            <td>{{line['num']}}</td>
+           
+          </tr>
+          {% endfor %}
+         
+          
+      </table>
+
+      <style>
+        table {
+          font-size: small;;
+          border-collapse: collapse;
+          width: 100%;
+          counter-reset: row-num -1;
+        }
+    
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+    
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        
+        select { float: right }
+
+        table tr {
+          counter-increment: row-num;
+          }
+        
+        table tr td:first-child::before {
+        content: counter(row-num);
+        }
+        
+      </style>
+  
+      <a href="/staffhome">Go Back</a>
+  </body>
+  
+</html>

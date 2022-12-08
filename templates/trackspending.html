@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+</head>
+
+<body>
+
+    {% if username %} 
+		<h1>Welcome back, {{username}}</h1>
+	  {% endif %}
+
+    {% if year_total %}
+    <p>Your total spending in the past year was USD {{year_total}}. </p>
+    {% endif %}
+
+    {% if monthly_total %}
+    <p>Your total spending in the selected date range was USD {{monthly_total}}. </p>
+    {% endif %}
+
+    <center>
+
+    <form action="/trackspending" method="POST">
+      <h4>Select a range to view monthly spendings</h4>
+      <table class="table-status">
+        <tr>
+          <th>Start</th>
+          <td><input type="month" name = "start_month" placeholder="e.g. 2024-01"/></td>
+        </tr>
+        <tr>
+          <th>End</th>
+          <td><input type="month" name = "end_month" placeholder="e.g. 2024-01"/></td>
+        </tr>
+      </table>
+    
+    </br><input type="submit" value = Go />
+    </form>
+    
+    </center>
+      <center>
+        <h3>{{ title }}</h3>
+      </center>
+      <center>
+        <canvas id="chart" width="600" height="400"></canvas>
+        <script>
+          // bar chart data
+          var barData = {
+            labels : [
+              {% for item in labels %}
+               "{{ item }}",
+              {% endfor %}
+        ],
+    
+            datasets : [{
+              fillColor: "rgba(151,187,205,0.2)",
+              strokeColor: "rgba(151,187,205,1)",
+              pointColor: "rgba(151,187,205,1)",
+              data : [
+                {% for item in values %}
+                   "{{ item }}",
+                  {% endfor %}
+            ]
+              }
+            ]
+          }
+    
+         // get bar chart canvas
+         var mychart = document.getElementById("chart").getContext("2d");
+    
+           steps = 10
+           max = {{max}}
+    
+         // draw bar chart
+         new Chart(mychart).Bar(barData, {
+           scaleOverride: true,
+           scaleSteps: steps,
+           scaleStepWidth: Math.ceil(max / steps),
+           scaleStartValue: 0,
+           scaleShowVerticalLines: true,
+           scaleShowGridLines : true,
+           barShowStroke : true,
+           scaleShowLabels: true
+           }
+         );
+    
+        </script>
+      </center>
+
+
+    <a href="/customerhome">Go Back</a>
+
+</body>
+
+
+</html>

@@ -1,0 +1,62 @@
+<html>
+<head>
+</head>
+<body>
+	<form action="/customerflights" method="GET">
+<style>
+	table {
+	  font-size: small;;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+
+	tr:nth-child(even) {
+	  background-color: #dddddd;
+	}
+</style>
+
+
+<table>
+  <th>Ticket Id</th>
+  <th>Sold Price</th>
+  <th>Card Type</th>
+  <th>Card Number</th>
+  <th>Name on Card</th>
+  <th>Expiration Date</th>
+  <th>Purchase Date Time</th>
+  <th>Flight Number</th>
+  <th>Departure Date</th>
+  <th>Departure Time</th>
+
+
+{% for line in tickets %}
+	<tr>
+		<td>{{line['ticket_id']}}</td>
+		<td>{{line['sold_price']}}</td>
+    <td>{{line['card_type']}}</td>
+		<td>{{line['card_number']}}</td>
+    <td>{{line['name_on_card']}}</td>
+		<td>{{line['expiration_date']}}</td>
+    <td>{{line['purchase_date_time']}}</td>
+		<td>{{line['flight_num']}}</td>
+    <td>{{line['departure_date']}}</td>
+    <td>{{line['departure_time']}}</td>
+
+	</tr>
+{% endfor %}
+</table>
+
+</br>
+
+<a href="/viewfrequent">Go Back</a>
+
+</body>
+
+
+</html>

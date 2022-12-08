@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+{% if not message %}
+	<p>Welcome back!</p>
+	<a href="/login">Login</a>
+	<a href="/register">Register</a>
+	</br>
+	<p>Search for flights by departure city/ airport name, destination city/ airport name,
+		departure date for one way, or departure and return dates for round trip. </p>
+	<input type="text" name = "departure city" placeholder="departure city"/>
+	<input type="text" name = "departure airport" placeholder="departure airport"/>
+	<input type="text" name = "departure date" placeholder="departure date"/> </br>
+	<input type="text" name = "arrival city" placeholder="arrival city"/>
+	<input type="text" name = "arrival airport" placeholder="arrival airport"/>
+	<input type="text" name = "arrival date" placeholder="arrival date"/> </br>
+	<input type="submit" value = Search />
+
+	{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+	{% endif %}
+{% endif %}
+
+
+</body>
+
+</html>

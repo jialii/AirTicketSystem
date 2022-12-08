@@ -1,0 +1,68 @@
+<html>
+<head>
+</head>
+<body>
+<form action="/addrating" method="POST">
+	<h1>Ratings</h1>
+	<h4>Choose the flight you would like to rate or comment on:</h4>
+	<select name="flight_num" required>
+			{% for line in flights %}
+				<option value={{line['flight_num']}}>Flight {{line['flight_num']}}</option>
+			{% endfor %}
+	</select>
+  <h4>Enter a Numeric Rating Out of 5:</h4>
+	<select name="ratings" required>
+		  <option value="none" selected disabled hidden>Select Numeric Rating</option>
+			<option value=0>0</option>
+	    <option value=1>1</option>
+			<option value=2>2</option>
+			<option value=3>3</option>
+			<option value=4>4</option>
+			<option value=5>5</option>
+	</select>
+
+  <h4>Enter a Comment:</h4>
+  <input type="text" name = "comments" placeholder="Comment" required/> </br>
+	<p></p>
+  <input type="submit" value = Submit />
+</form>
+
+
+<style>
+	table {
+	  font-size: small;;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+
+	tr:nth-child(even) {
+	  background-color: #dddddd;
+	}
+</style>
+
+<table>
+	<th>Flight Number</th>
+	<th>Rating</th>
+  <th>Comment</th>
+
+{% for line in ratings %}
+	<tr>
+		<td>{{line['flight_num']}}</td>
+		<td>{{line['ratings']}}</td>
+    <td>{{line['comments']}}</td>
+	</tr>
+{% endfor %}
+</table>
+
+<a href="/customerhome">Go Back</a>
+
+</body>
+
+
+</html>

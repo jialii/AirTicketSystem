@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+	<h1>Welcome!</h1>
+
+	<a href="/login">Login</a>
+	<a href="/register">Register</a></br>
+
+	<form action="/home" method="POST">
+		<h4>Search flights by airport code and date.</h4>
+		<table class="table-status">
+			<tr>
+			  	<th>Departure airport</th>
+			  	<td><input type="text" name = "departure_airport" placeholder="e.g. PVG"/></td>
+			</tr>
+			<tr>
+			  	<th>Departure date</th>
+			  	<td><input type="date" name = "departure_date" placeholder="Departure date"/></td>
+			</tr>
+			<tr>
+				<th>Arrival airport</th>
+				<td><input type="text" name = "arrival_airport" placeholder="e.g. JFK"/></td>
+			</tr>
+			<tr>
+				<th>Return date</th>
+				<td><input type="date" name = "return_date" placeholder="Return date"/></td>
+			</tr>
+		</table>
+
+		</br><input type="submit" value = Search />&emsp;<input type='checkbox' name = 'round_trip' value="round-trip" >Round trip 
+		{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+		{% endif %}
+	</form>
+
+	</br>
+	<form action="/flight-city" method="POST">
+		<h4>Search flights by city and date.</h4>
+		<table class="table-status">
+			<tr>
+			  	<th>Departure city</th>
+			  	<td><input type="text" name = "departure_city" placeholder="e.g. Shanghai"/></td>
+			</tr>
+			<tr>
+			  	<th>Departure date</th>
+			  	<td><input type="date" name = "departure_date" placeholder="Departure date"/></td>
+			</tr>
+			<tr>
+				<th>Arrival city</th>
+				<td><input type="text" name = "arrival_city" placeholder="e.g. NYC"/></td>
+			</tr>
+			<tr>
+				<th>Return date</th>
+				<td><input type="date" name = "return_date" placeholder="Return date"/></td>
+			</tr>
+		</table>
+		</br><input type="submit" value = Search />&emsp;<input type='checkbox' name = 'round_trip' value="round-trip" >Round trip
+		{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+		{% endif %}
+	</form>
+
+
+	</br>
+	<form action="/status" method="POST">
+		<h4>Check the flight status by entering the airline name, flight number, and arrival/ departure date. </h4>
+		<table class="table-status">
+			<tr>
+			  	<th>Airline name</th>
+			  	<td><input type="text" name = "airline_name" placeholder="e.g. United"/></td>
+			</tr>
+			<tr>
+			  	<th>Flight number</th>
+			  	<td><input type="text" name = "flight num" placeholder="e.g. 123" required/></td>
+			</tr>
+			<tr>
+				<th>Departure date</th>
+				<td><input type="date" name = "departure_date" placeholder="e.g. 2021-01-01"/></td>
+			</tr>
+			<tr>
+				<th>Arrival date</th>
+				<td><input type="date" name = "arrival_date" placeholder="Return date"/></td>
+			</tr>
+		</table>
+		</br><input type="submit" value = Search />
+		{% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+		{% endif %}
+	</form>
+	</br>
+
+
+	{% if posts %}
+		<hr>
+		<p>Flight Information</p>
+		<table>
+		<tr>
+			<th>Flight Number</th>
+			<th>Departure Date</th>
+			<th>Departure Time</th>
+			<th>Departure Airport</th>
+			<th>Arrival Date</th>
+			<th>Arrival Time</th>
+			<th>Arrival Airport</th>
+			<th>Base Price</th>
+			<th>Status</th>
+			<th>Airline Name</th>
+			<th>Airplane ID</th>
+		</tr>
+		{% for line in posts%}
+			<tr>
+				<td>{{line['flight_num']}}</td>
+				<td>{{line['departure_date']}}</td>
+				<td>{{line['departure_time']}}</td>
+				<td>{{line['departure_airport']}}</td>
+				<td>{{line['arrival_date']}}</td>
+				<td>{{line['arrival_time']}}</td>
+				<td>{{line['arrival_airport']}}</td>
+				<td>{{line['base_price']}}</td>
+				<td>{{line['status']}}</td>
+				<td>{{line['airline_name']}}</td>
+				<td>{{line['id_num']}}</td>
+			</tr>
+		{% endfor %}
+		</table>
+
+	{% endif %}
+
+
+</body>
+
+<style>
+	table {
+	  font-size: small;;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	.table-status {
+	  font-size: small;;
+	  border-collapse: collapse;
+	  width: 25%;
+	}
+	
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+	
+	tr:nth-child(even) {
+	  background-color: #dddddd;
+	}
+</style>
+
+</html>

@@ -1,0 +1,82 @@
+<html>
+<head>
+</head>
+<body>
+<form action="/viewreports" method="POST">
+	<h1>Reports</h1>
+	<h4>Specify Date Range:</h4>
+  <h4>Enter Start Date :</h4>
+	<input type='date' name= "startdate" required/></br>
+  <h4>Enter End Date:</h4>
+  <input type='date' name= "enddate" required/></br>
+	<p></p>
+  <input type="submit" value = Submit />
+</form>
+
+<form action="/viewreports"></form>
+
+<style>
+	table {
+	  font-size: small;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+
+	tr:nth-child(even) {
+	  background-color: #dddddd;
+	}
+</style>
+
+{% if specify %}
+	<h1>Results</h1>
+	<table>
+	  <th>Month and Year</th>
+	  <th>Total</th>
+
+	{% for line in specify %}
+		<tr>
+			<td>{{line['month']}} {{line['year']}}</td>
+			<td>{{line['total']}}</td>
+		</tr>
+	{% endfor %}
+	</table>
+{% endif %}
+<p></p>
+
+{% if main_display=='lastmonth' %}
+	<h1>Last Month's Report</h1>
+{% elif main_display=='lastyear' %}
+	<h1>Last Year's Reports</h1>
+{% else %}
+	<h1>All Reports</h1>
+{% endif %}
+
+<form action="/viewreports" method="POST">
+	<select name="displayflights" required>
+		<option value="allflights" selected>All Flights</option>
+		<option value="lastmonth" >Last Month</option>
+		<option value="lastyear" >Last Year</option>
+	</select> <input type="submit" value = Submit />
+<form action="/viewreports"></form>
+
+<table>
+  <th>Month and Year</th>
+  <th>Total</th>
+
+{% for line in tickets %}
+	<tr>
+		<td>{{line['month']}} {{line['year']}}</td>
+		<td>{{line['total']}}</td>
+	</tr>
+{% endfor %}
+</table>
+<p></p>
+<a href="/staffhome">Go Back</a>
+
+</body>

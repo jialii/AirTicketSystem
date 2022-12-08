@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+	{% if username %} 
+		<h1>Welcome back, {{username}}</h1>
+	{% else %}
+		<h1>Welcome!</h1>
+		<a href="/login">Login</a>
+		<a href="/register">Register</a></br>
+	{% endif %}
+
+	{% if username %} 
+
+		{% if message %}
+		<p><strong>Success!</strong> {{message}}</p>
+		{% endif %}
+
+    <form action="/purchaseAuth" method="POST">
+		<h4> Purchase a ticket by entering the following Information. </h4>
+        <table class="table-status">
+			<tr>
+			  	<th>Flight number</th>
+			  	<td><input type="text" name = "flight_num" placeholder="e.g. 123" required/></td>
+			</tr>
+			<tr>
+				<th>Card type</th>
+				<td><select name="card_type" required>
+					<option value="none" selected disabled hidden>Select</option>
+					  <option value="credit">Credit</option>
+				  	  <option value="debit">Debit</option>
+			  	</select></td>
+				<!-- <td><input type="text" name = "card_type" placeholder="credit/ debit"/></td> -->
+			</tr>
+			<tr>
+				<th>Card number</th>
+				<td><input type="text" name = "card_number" placeholder="e.g. 1234 5678 9101 1213"/></td>
+			</tr>
+            <tr>
+				<th>Name on card</th>
+				<td><input type="text" name = "name_on_card" placeholder="e.g. Jane Doe"/></td>
+			</tr>
+            <tr>
+				<th>Expiration date</th>
+				<td><input type="month" name = "expiration_date" placeholder="e.g. 2024-01"/></td>
+			</tr>
+            
+		</table>
+		</br><input type="submit" value = Purchase />
+		
+        {% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+		{% endif %}
+
+		&emsp;<a href="/customerhome">Go back</a>
+    
+    </form>
+	{% endif %}
+	<br>
+
+	{% if posts %}
+		<hr>
+		<h4>Future flights</h4>
+		<table>
+		<tr>
+			<th>Flight Number</th>
+			<th>Departure Date</th>
+			<th>Departure Time</th>
+			<th>Departure Airport</th>
+			<th>Arrival Date</th>
+			<th>Arrival Time</th>
+			<th>Arrival Airport</th>
+			<th>Base Price</th>
+			<th>Status</th>
+			<th>Airline Name</th>
+			<th>Airplane ID</th>
+		</tr>
+		{% for line in posts%}
+			<tr>
+				<td>{{line['flight_num']}}</td>
+				<td>{{line['departure_date']}}</td>
+				<td>{{line['departure_time']}}</td>
+				<td>{{line['departure_airport']}}</td>
+				<td>{{line['arrival_date']}}</td>
+				<td>{{line['arrival_time']}}</td>
+				<td>{{line['arrival_airport']}}</td>
+				<td>{{line['base_price']}}</td>
+				<td>{{line['status']}}</td>
+				<td>{{line['airline_name']}}</td>
+				<td>{{line['id_num']}}</td>
+			</tr>
+		{% endfor %}
+		</table>
+
+	{% endif %}
+
+</body>
+
+<style>
+	table {
+	  font-size: small;;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	.table-status {
+	  font-size: small;;
+	  border-collapse: collapse;
+	  width: 25%;
+	}
+	
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+	
+	tr:nth-child(even) {
+	  background-color: #dddddd;
+	}
+</style>
+
+</html>

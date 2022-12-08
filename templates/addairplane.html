@@ -1,0 +1,67 @@
+<html>
+<head>
+</head>
+<body>
+    <h3>Add Airplane</h3>
+    {% if username %} 
+    {% if message %}
+		<p><strong>Success!</strong> {{message}}</p>
+		{% endif %}
+    <form action="/addairplane" method="POST" >
+
+    <table>
+        <tr>
+            <td>Airplane ID</td>
+            <td ><input type="text" name="airplane_id" placeholder="e.g. 123" required/></td>
+        </tr>
+
+        <tr>
+            <td>Number of Seats</td>
+            <td><input type="text" name="num_seats" placeholder="e.g. 123" required/></td>
+        </tr>
+
+       
+    </table>
+    <p></p>
+    <input type="submit" value="Submit"></form>
+    {% endif %}
+
+<h3>Current Airplanes</h3>
+<table>
+    <th>Airplane ID</th>
+    <th>Number of Seats</th>
+    <th>Airline Name</th>
+
+
+    {% for line in airplane %}
+    <tr>
+      <td>{{line['id_num']}}</td>
+      <td>{{line['num_seats']}}</td>
+      <td>{{line['airline_name']}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+
+
+<p></p>
+<a href="/staffhome">Go Back</a>
+
+<style>
+	table {
+	  font-size: small;;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+
+	tr:nth-child(even) {
+	  background-color: #dddddd;
+	}
+</style>
+</html>

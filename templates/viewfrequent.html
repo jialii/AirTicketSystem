@@ -1,0 +1,63 @@
+<body>
+  <h3>View Frequent Customers 
+    
+  </h3>
+    <style>
+        table {
+          font-size: small;;
+          border-collapse: collapse;
+          width: 100%;
+        }
+    
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+    
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        
+        select { float: right }
+
+    </style>
+   
+    <table id="myTable">
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+  
+        <th>Date of Birth</th>
+        <th>Tickets Purchased</th>
+        <th>View Recent Flights</th>
+      
+        
+        {% for line in info %}
+        <tr>
+            <td>{{line['email']}}</td>
+            <td>{{line['first_name']}}</td>
+            <td>{{line['last_name']}}</td>
+           
+            <td>{{line['date_of_birth']}}</td>
+            <td>{{line['num']}}</td>
+            <td>{{line['View Recent Flights']}}
+              <form action="/customerflights" method="POST">
+                <button type="submit" name="cust_email" value="{{line['email']}}">View</button>
+              </form>
+            </td>
+            
+        </tr>
+        {% endfor %}
+        
+    </table>
+
+    <script>
+      $("button").click(function(){
+      var value=$(this).attr("value");
+      alert($(this).attr('value'))
+      });
+      </script>
+
+    <a href="/staffhome">Go Back</a>
+</body>

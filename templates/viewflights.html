@@ -1,0 +1,104 @@
+<html>
+<head>
+</head>
+<body>
+<h1>Flights for {{airline_name}}</h1>
+
+<form action="/viewflights" method="POST">
+	<h4>Specify Date Range:</h4>
+  <b>Enter Start Date :</b>
+	<input type='date' name= "startdate" required/></br>
+	<p></p>
+  <b>Enter End Date:</b>
+  <input type='date' name= "enddate" required/></br>
+	<p></p>
+  <input type="submit" value = Submit />
+</form>
+<form action="/viewflights" method="POST">
+	<b>Specify Departure Airport:</b>
+	<select name="departure_airport" required>
+			{% for line in d_airports %}
+				<option value={{line['departure_airport']}}>Airport {{line['departure_airport']}}</option>
+			{% endfor %}
+	</select><p><p/><input type="submit" value = Submit />
+<form action="/viewflights"></form>
+<form action="/viewflights" method="POST">
+	<b>Specify Arrival Airport:</b>
+	<select name="arrival_airport" required>
+			{% for line in a_airports %}
+				<option value={{line['arrival_airport']}}>Airport {{line['arrival_airport']}}</option>
+			{% endfor %}
+	</select><p><p/><input type="submit" value = Submit />
+<form action="/viewflights"></form>
+<form action="/viewflights" method="POST">
+	<input type="submit" value = "Return to Showing Deafult" />
+<form action="/viewflights"></form>
+
+
+<style>
+	table {
+	  font-size: small;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+
+	tr:nth-child(even) {
+	  background-color: #dddddd;
+	}
+</style>
+
+
+{% if typeofdisplay =='range_of_dates' %}
+	<h1>Flights From {{startdate}} to {{enddate}}</h1>
+{% elif typeofdisplay == 'source_airport' %}
+	<h1>Flights From {{airport}}</h1>
+{% elif typeofdisplay == 'destination_airport' %}
+	<h1>Flights To {{airport}}</h1>
+{% else %}
+	<h1>Flights For the Next 30 Days</h1>
+{% endif %}
+
+<table>
+	<th>Flight Number</th>
+	<th>Departure Date</th>
+	<th>Departure Time</th>
+	<th>Departure Airport</th>
+	<th>Arrival Date</th>
+	<th>Arrival Time</th>
+	<th>Arrival Airport</th>
+	<th>Base Price</th>
+	<th>Status</th>
+	<th>Airline Name</th>
+	<th>Airplane ID</th>
+	<th>Customers</th>
+
+	{% for line in flights %}
+	<tr>
+	  <td>{{line['flight_num']}}</td>
+	  <td>{{line['departure_date']}}</td>
+	  <td>{{line['departure_time']}}</td>
+	  <td>{{line['departure_airport']}}</td>
+	  <td>{{line['arrival_date']}}</td>
+	  <td>{{line['arrival_time']}}</td>
+	  <td>{{line['arrival_airport']}}</td>
+	  <td>{{line['base_price']}}</td>
+	  <td>{{line['status']}}</td>
+	  <td>{{line['airline_name']}}</td>
+	  <td>{{line['id_num']}}</td>
+		<td><form action="/viewcustomers" method="GET">
+		  <button type="submit" name="flight_num" value="{{line['flight_num']}}">View</button>
+		</form></td>
+	</tr>
+	{% endfor %}
+</table>
+
+<p></p>
+<a href="/staffhome">Go Back</a>
+
+</body>

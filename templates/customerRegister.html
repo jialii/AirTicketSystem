@@ -1,0 +1,107 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <form action="/customerRegister" method="POST">
+            <table>
+                <h2>Please enter your information </h2>
+                <h3>Name:</h3>
+                <tr>
+                    <p>First name:
+                    <input type="text" name = "first_name" placeholder="First Name" required/>
+                    <p>Last name:
+                    <input type="text" name = "last_name" placeholder="Last Name" required/><br>
+                </tr>
+
+                <h3>Email and Password:</h3>
+                <p>Email:
+                <input type="text" name = "email" placeholder="Enter your email" required/> </br>
+
+                <tr>
+                    <p>Password:
+                    <input type="password" name = "password" placeholder="password" required/>
+                    <p>Please re-enter your password:
+                    <input type="password" name = "passwordtwo" placeholder="password" required/></br>
+                </tr>
+
+                
+                <h3>More Information: </h3> 
+                
+                <p>Date Of Birth:
+                <input type="date" name = "dob" placeholder="YYYY-MM-DD" required/> </br>
+                <tr>
+
+
+                <p>Phone Number: 
+                <input type="text" name = "phone_number" placeholder="Phone Number" required/> </br>
+                
+                <h3>Address:</h3>
+                <p>Street:
+                <input type="text" name = "street" placeholder="Street" required/> </br>
+                <p>Building Number:
+                <input type="text" name = "building_num" placeholder="Building Number" required/> </br>
+                <p>City:
+                <input type="text" name = "city" placeholder="City" required/> </br>
+                <p>State:
+                <input type="text" name = "state" placeholder="State" required/> </br>
+
+                
+                <h3>Passport Information: </h3>
+                <p>Passport Number:
+                <input type="text" name = "passport_number" placeholder="Passport Number" required/> </br>
+                
+                <p>Passport Expiration Date: 
+                <input type="date" name = "passport_exp_date" placeholder="YYYY/MM/DD" required/> </br>
+
+                <p>Passport Country: 
+                <input type="text" name = "passport_country" placeholder="Passport Country" required/> </br>
+                <p></p>
+
+                <input type="submit" value = 'Register' />
+                {% if error %}
+                    <p class="error"><strong>Error:</strong> {{error}}</p>
+                {% endif %}
+            </table>
+            
+        </form>
+                    
+        
+    </body>
+    
+    <style>
+        table {
+          font-size: small;;
+          border-collapse: collapse;
+          width: 100%;
+        }
+    
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+    
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+
+        .input-wrapper div{
+            margin-bottom: 10px;
+        }
+
+        .remove-input{
+            margin-top:10px;
+            margin-left:15px;
+            vertical-align:tect-bottom;
+        }
+
+        .add-input{
+            margin-top:10px;
+            margin-left:10px;
+            vertical-align:text-bottom;
+        }
+
+    </style>
+
+
+    </html>
